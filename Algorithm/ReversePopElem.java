@@ -56,7 +56,7 @@ public class ReversePopElem {
 		 nodeHead=node;
 		 for(int i=0;i<21;i++){
 			 System.out.print(node.val+" ");
-			 node.next=new ListNode(i);
+			 node.next=new ListNode((int)(Math.random()*100));
 			 node=node.next;
 		 }
 		 System.out.print(node.val+" ");
