@@ -22,7 +22,7 @@ class ListNode {
 
 public class ReversePopElem {
 	public static ListNode FindKthToTail(ListNode head,int k) {
-		if(head==null)
+		if(head==null||k<0)
 			//throw new RuntimeException("empty list");
 			return null;
 		int length=1;
