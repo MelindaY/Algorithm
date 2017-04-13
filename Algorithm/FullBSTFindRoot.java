@@ -25,6 +25,7 @@ public class FullBSTFindRoot {
 		int j=s.nextInt();
 		int k=s.nextInt();
 		int right=s.nextInt();
+		s.close();
 		FullBSTFindRoot bst=new FullBSTFindRoot();
 		System.out.println(bst.findRoot(i,j,k,1,(2 <<right)-1));
 		

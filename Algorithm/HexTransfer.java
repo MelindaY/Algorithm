@@ -7,6 +7,7 @@ public class HexTransfer {
 	public static void main(String[] args) {
 		Scanner s =  new Scanner(System.in);
 		String str = s.nextLine();
+		s.close();
 		int count=str.length()/16;
 		for(int i=0x0;i<count;i++){
             String ss="00000000"+Integer.toHexString(i*16);
