@@ -11,14 +11,6 @@ package Algorithm;
  *        因为引用指向对象的第一个元素
  *        可以对比ParitySort里面对于数组的引用和赋值
  * */
-class ListNode {
-    int val;
-    ListNode next = null;
-
-    ListNode(int val) {
-        this.val = val;
-    }
-}
 
 public class ReversePopElem {
 	public static ListNode FindKthToTail(ListNode head,int k) {

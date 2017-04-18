@@ -1,4 +1,6 @@
 package Algorithm;
+
+
 /*
  * 题目：    输入两个单调递增的链表，输出两个链表合成后的链表，
  *       当然我们需要合成后的链表满足单调不减规则。
@@ -15,6 +17,13 @@ package Algorithm;
  *       讲真，这个题用递归就1分钟。但是我貌似不习惯递归的思维
  *           
  * */
+class ListNode {
+	int val;
+    ListNode next = null;
+    ListNode(int val) {
+        this.val = val;
+   }
+}
 public class MergeLists {
 
     public static ListNode Merge(ListNode list1,ListNode list2) {

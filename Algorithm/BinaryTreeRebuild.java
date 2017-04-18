@@ -37,12 +37,23 @@ public class BinaryTreeRebuild {
 		  }
 		  return root;
 	  }
+		public void Mirror(TreeNode root) {
+			if(root==null)
+				return;
+			TreeNode swp=new TreeNode(0);
+			swp=root.left;
+			root.left=root.right;
+			root.right=swp;
+			Mirror(root.left);
+			Mirror(root.right);      
+	    }
 	  public static void main(String[] args){
 		  int[] pre= {1,2,4,3,5,6};
 		  int[] in={4,2,1,5,3,6};
 		  TreeNode root=null;
 		  BinaryTreeRebuild treeBuild=new  BinaryTreeRebuild();
 		  root=treeBuild.reConstructBinaryTree(pre,in);
+		  treeBuild.Mirror(root);
 		  while(root!=null){
 			  System.out.print(root.val);
 			  if(root.left!=null)
