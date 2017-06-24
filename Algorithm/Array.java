@@ -812,6 +812,87 @@ public class Array {
 		B[i]*=C[i];
 	 return B;
  }
+ /**
+  * 请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。
+  * 路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。
+  * 如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 
+  * 例如 a b c e s f c s a d e e 矩阵中包含一条字符串"bcced"的路径，
+  * 但是矩阵中不包含"abcb"路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。
+  * @param matrix 
+  * @param rows
+  * @param cols
+  * @param str
+  * @return
+  */
+ public boolean hasPath(char[] matrix, int rows, int cols, char[] str)
+ {
+	 if(matrix.length==0||str.length==0)
+		 return false;
+	 int[]flag=new int[matrix.length];
+	 for(int i=0;i<rows;i++)
+	 {
+		 for(int j=0;j<cols;j++)
+			 if(helper(matrix,rows,cols,0,i,j,str,flag))
+				 return true;
+	 }
+	 return false;
+ 
+ }
+ 
+ public boolean helper(char[] matrix, int rows, int cols,int indexStr,int i,int j, char[] str,int[]flag){
+	 int index=i*cols+j;                //j*cols+i不对：5行6列 计算index 应该是当前行*列数+当前列
+	 if(j>=cols||j<0||i>=rows||i<0||str[indexStr]!=matrix[index]||flag[index]==1)
+		 return false;
+	 if(indexStr==str.length-1)
+		 return true;
+	 flag[index]=1;
+	 if(helper(matrix,rows,cols,indexStr+1,i+1,j,str,flag)||
+		helper(matrix,rows,cols,indexStr+1,i-1,j,str,flag)||
+		helper(matrix,rows,cols,indexStr+1,i,j-1,str,flag)||
+		helper(matrix,rows,cols,indexStr+1,i,j+1,str,flag))
+		 return true;
+	 flag[index]=0;
+	 return false;
+ }
+ 
+ /**
+  * 地上有一个m行和n列的方格。一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格，
+  * 但是不能进入行坐标和列坐标的数位之和大于k的格子。 例如，当k为18时，机器人能够进入方格（35,37），
+  * 因为3+5+3+7 = 18。但是，它不能进入方格（35,38），因为3+5+3+8 = 19。请问该机器人能够达到多少个格子？
+  * @param threshold
+  * @param rows
+  * @param cols
+  * @return
+  */
+ 
+ public int movingCount(int threshold, int rows, int cols)
+ {
+	 if(threshold<0)
+		 return 0;
+	 int[]flag=new int[rows*cols];
+	 return helperCount(threshold,rows,cols,0,0,flag);
+ 
+ }
+ 
+ private int helperCount(int threshold, int rows, int cols,int i,int j,int[]flag){
+	 int index=i*cols+j;                //j*cols+i不对：5行6列 计算index 应该是当前行*列数+当前列
+	 if(j>=cols||j<0||i>=rows||i<0||sumDigit(i)+sumDigit(j)>threshold||flag[index]==1)
+		 return 0;
+	 flag[index]=1;
+	 return(helperCount(threshold,rows,cols,i+1,j,flag)+
+			 helperCount(threshold,rows,cols,i-1,j,flag)+
+			 helperCount(threshold,rows,cols,i,j+1,flag)+
+			 helperCount(threshold,rows,cols,i,j-1,flag)+1);
+ }
+
+ private int sumDigit(int num){
+	 int j=0;
+	 do{
+		 j+=num%10;
+		 num=num/10;
+	 }while(num>0);
+	 return j;
+ }
  
     public static void main(String[] args){
     	
@@ -831,10 +912,9 @@ public class Array {
     	    System.out.println(minK.get(i));
     }*/
     	//System.out.println();
-    	int[]test={ 1,2,3,4,5};
-    	int[]B=arr.multiply(test);
-    	print(B.toString());
-    	print(Arrays.toString(B));
+    	char[] matrix={'A','B','C','E','S','F','C','S','A','D','E','E'};
+    	char[] str={'S','E','E'};
+    	print(arr.movingCount(15,20,20));
     	/*arr.QuickSort(test,0,test.length-1);
     	for(int i=0;i<test.length;i++)
     		System.out.println(test[i]);*/

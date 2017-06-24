@@ -49,7 +49,7 @@ public class Tree {
 	private TreeNode tmp=null;  //Q8
 	private TreeNode head=null; //Q8
 	private TreeNode root=null; 
-	
+	private int index=-1;
 	
 	public TreeNode getRoot(){
 		 return root;
@@ -552,15 +552,20 @@ public class Tree {
     	StringBuilder sb=new StringBuilder();
         if(root==null){
         	sb.append("#");
+        	sb.append(",");
         	return sb.toString();
         }
         sb.append(root.val);
+        sb.append(",");
         sb.append(Serialize(root.left));
         sb.append(Serialize(root.right));
         return sb.toString();
         
     }
-    /*public  TreeNode Deserialize(String str) {
+   /* public  TreeNode Deserialize(String str) {
+         char[]ch=str.toCharArray();
+         if(str==null||ch[0]=='#')
+        	 return null;
          
     }*/
 	    
